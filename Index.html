@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Business Automation & Marketing Training | AI Profit Advantage</title>
+    <meta name="description" content="Build revenue-generating AI systems. Master direct-response copywriting, CRO, and workflow automation with our practical, zero-hype training platform.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & THEME SETUP --- */
+        :root {
+            --bg-base: #0B0F19;
+            --bg-card: #111827;
+            --bg-card-hover: #1E293B;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --accent: #10B981;
+            --accent-hover: #059669;
+            --border: rgba(148, 163, 184, 0.15);
+            --font-head: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+            --max-width: 1200px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- GLOBAL RESET & BASE STYLES --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); }
+        h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 1.5rem; text-align: center; }
+        h3 { font-size: 1.35rem; margin-bottom: 0.75rem; }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        /* --- UTILITIES & LAYOUT REUSE --- */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .section-padding {
+            padding: 6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        /* --- BUTTONS & INTERACTIVE UI --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.85rem 1.75rem;
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--bg-base);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-secondary);
+        }
+
+        /* --- GLOBAL NAVIGATION --- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 4.5rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 1.75rem;
+            height: 1.75rem;
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+
+        .logo-text {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--accent);
+        }
+
+        /* --- PAGE MANIPULATION (SPA ARCHITECTURE) --- */
+        .page-view {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .page-view.active-view {
+            display: block;
+            opacity: 1;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 8rem 0 6rem 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            margin: 0 auto 1.5rem auto;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 0 auto 2.5rem auto;
+            font-size: 1.2rem;
+        }
+
+        .hero-ctas {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-micro {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- SOCIAL PROOF ACCORD --- */
+        .authority-bar {
+            padding: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .authority-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            opacity: 0.6;
+        }
+
+        .logo-item {
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: -0.03em;
+        }
+
+        /* --- PROBLEM/AGITATION --- */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .problem-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+        }
+
+        .problem-card h3 {
+            color: #EF4444; /* Explicit warning indication for structural problem tracking */
+        }
+
+        /* --- SOLUTION FRAMEWORK --- */
+        .solution-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .solution-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card-num {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: 800;
+            color: rgba(16, 185, 129, 0.1);
+            font-family: var(--font-head);
+        }
+
+        /* --- BENEFITS MATRIX TABLE --- */
+        .matrix-wrapper {
+            overflow-x: auto;
+            margin-top: 3rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            background-color: var(--bg-card);
+        }
+
+        th, td {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background-color: rgba(255, 255, 255, 0.02);
+            color: var(--text-primary);
+            font-family: var(--font-head);
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        td strong {
+            color: var(--accent);
+        }
+
+        /* --- INTERACTIVE FAQ --- */
+        .faq-list {
+            max-width: 800px;
+            margin: 3rem auto 0 auto;
+        }
+
+        .faq-item {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-trigger {
+            width: 100%;
+            padding: 1.5rem;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-head);
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-trigger::after {
+            content: '+';
+            font-size: 1.5rem;
+            color: var(--accent);
+            transition: var(--transition);
+        }
+
+        .faq-item.open .faq-trigger::after {
+            content: '−';
+            transform: rotate(90deg);
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.open .faq-content {
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            max-height: 300px;
+        }
+
+        /* --- TERMINAL CTA SANDBOX --- */
+        .terminal-cta {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 4rem 3rem;
+            text-align: center;
+            margin-top: 6rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-box-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cta-card {
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .cta-card p {
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* --- ABOUT PAGE SPECIFICS --- */
+        .about-hero {
+            padding: 6rem 0 4rem 0;
+            text-align: center;
+        }
+        
+        .about-hero max-w, .about-content-block {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content-block p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .anchors-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        /* --- PRODUCTS TIER DIRECTORY --- */
+        .directory-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .tier-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .tier-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3.5rem;
+            border-radius: 12px;
+        }
+
+        .tier-row.premium-tier {
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.05);
+        }
+
+        .tier-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--accent);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .tier-row ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .tier-row ul li {
+            position: relative;
+            padding-left: 1.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-row ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* --- CONTACT BRIEF & FORM --- */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info blockquote {
+            border-left: 2px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .routing-channels {
+            margin-top: 2rem;
+        }
+
+        .channel {
+            margin-bottom: 1.5rem;
+        }
+
+        .channel h4 {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .channel p {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .contact-form-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 12px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.25rem;
+        }
+
+        /* --- GLOBAL FOOTER --- */
+        footer {
+            margin-top: auto;
+            background-color: #05070B;
+            border-top: 1px solid var(--border);
+            padding: 4rem 0;
+        }
+
+        .footer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-copy {
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE BREAKPOINTS (MOBILE RE-ENGINEERING) --- */
+        @media (max-width: 992px) {
+            .problem-grid, .solution-stack, .anchors-grid, .cta-box-grid, .tier-row, .contact-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tier-row {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none; /* Simplification for modular delivery. Native hamburger can overlay here. */
+            }
+            
+            .hero-ctas {
+                flex-direction: column;
+                padding: 0 2rem;
+            }
+
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GLOBAL HEADER NAVIGATION -->
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo-area" onclick="switchPage('home')">
+                <div class="logo-icon"></div>
+                <span class="logo-text">AI Profit Advantage</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a id="nav-home" class="active" onclick="switchPage('home')">Home</a></li>
+                    <li><a id="nav-products" onclick="switchPage('products')">Courses & Programs</a></li>
+                    <li><a id="nav-about" onclick="switchPage('about')">Our System</a></li>
+                    <li><a id="nav-contact" onclick="switchPage('contact')">Contact</a></li>
+                </ul>
+            </nav>
+            <div>
+                <a onclick="switchPage('products')" class="btn btn-primary" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN PAGE CONTAINER LAYER -->
+    <main>
+
+        <!-- ========================================== -->
+        <!-- 1. HOME VIEW                               -->
+        <!-- ========================================== -->
+        <div id="page-home" class="page-view active-view">
+            
+            <!-- HERO SECTION -->
+            <section class="hero container">
+                <h1>Build AI-Driven Business Systems That Automate Your Workload and Multiply Revenue—Without the Hype.</h1>
+                <p>Most people use AI as a parlor trick. We teach you how to treat it as infrastructure. Discover practical, results-driven AI training integrated with direct-response marketing and automation—engineered for entrepreneurs, freelancers, and growth-minded professionals.</p>
+                <div class="hero-ctas">
+                    <a onclick="switchPage('products')" class="btn btn-primary">Explore the Systems →</a>
+                    <a href="#lead-magnet" class="btn btn-secondary">Get Free AI Toolkit</a>
+                </div>
+                <span class="hero-micro">Join 15,000+ scaling businesses. No technical background required.</span>
+            </section>
+
+            <!-- AUTHORITY POSITIONING BLOCK -->
+            <div class="authority-bar">
+                <div class="container">
+                    <div class="authority-title">Trusted by Innovators and Alumni Globally</div>
+                    <div class="logo-grid">
+                        <div class="logo-item">OpenAI Ecosystem</div>
+                        <div class="logo-item">Zapier Certified</div>
+                        <div class="logo-item">Notion Enterprise</div>
+  
